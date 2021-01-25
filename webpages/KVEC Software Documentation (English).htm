@@ -1,0 +1,992 @@
+<!-- Erstellt vom Home Page Wizard -- CompuServe Inc. --  Letze Aktualisierung: Apr 22, 2001  15:37 ->
+
+<html>
+<!-- Die folgenden HTML-Tags repräsentieren die Überschrift und den Titel. Mit Hilfe dieser Tags können Sie einen Titel für Ihre Seite angeben. -->
+<head><title>KK-Software documentation page 1</title></head>
+
+<!-- Das folgende HTML-Tag repräsentiert den Textkörper. Es definiert den Fließtext auf dieser Seite. -->
+<body bgcolor="#fffbf0">
+
+<!-- Das folgende ist eine HTML-Überschriftenebene. Die gültigen Werte liegen zwischen H1 (höchste Ebene) und H6 (unterste Ebene). -->
+<center><h1>KK-Software documentation page 1</h1></center>
+
+<!-- Das folgende HTML-Tag repräsentiert eine interne Verknüpfung. Es  verweist auf eine andere Seite in Ihrem Projekt. -->
+<br><a href="../../../english/index.htm" target="_top">Back to Homepage</a>
+
+<br><a href="software_doc_eng2.htm">Next page
+
+<center></a><h3>Software Documentation
+(This documentation may not be up to date. Please refer to KVEC.TXT in the KVEC package which you can download)</h3></center>
+
+<!-- Das folgende HTML-Tag repräsentiert Fließtext. -->
+<p><pre>******************************************************************************
+*                    K V E C   D O C U M E N T A T I O N                     *
+*                                                                            *
+*    +++ KK-Software +++ KK-Software +++ KK-Software +++ KK-Software +++     *
+*----------------------------------------------------------------------------*
+*  Dipl.-Phys. Karl-Heinz Kuhl, Brunnlohestr. 2,  92637 Weiden,  Germany     *
+*----------------------------------------------------------------------------*
+*         Voice           FAX                        E-Mail                  *
+*    +49 961 6340837   +49 961 61455        <a href="mailto:support@kvec.de">support@kvec.de</a>                  *
+******************************************************************************
+
+
+
+
+
+What is KVEC?
+
+KVEC is a freeware program (formerly shareware) that allows you to convert raster graphics to
+vector graphics. You can freely use it.
+It can be freely distributed and copied. 
+KVEC is is very exacting with respect to memory demands. Vectorizing is a 
+critical process and often leads to a trade off between memory demands and 
+performance. It is crucial for the performance that your computer has enough
+RAM. The computing time on a Pentium 1 Ghz is in the order of magnitude of
+seconds up to minutes, depending on the size and the colour-depth of the
+input file.
+
+The selection of values for the switch parameters requires some caution.
+Noisy pictures (typical for scanned colour pictures) or pictures with a lot of
+very small details should be evaluated with larger 'grit values' and smaller 
+'quantize values' (explained below).
+The output formats DXF and HPGL are not suited for vectorization of coloured
+photos or coloured scanned pictures (unless you have lots of GigaBytes left
+on your harddisk ;-) the output size would be immense.
+
+Vector representations of images have several advantages in contrast to
+rastered block representations: operations like rotation, stretching, morphing
+and warping can much easier be performed and one does not have to care about
+aliasing and other unwanted effects. The application fields of a good 
+vectorizer reach from motion estimating in video sequences up to effective
+image compression.
+
+Please feel free to contact the author if you have problems with KVEC
+or if you find some bugs. KVEC is designed to run on several operating systems
+(which have different hardware and graphical environments), therefore this 
+release of KVEC is a graphic-independend commandline version. 
+
+The syntax is quite simple:
+
+     KVEC (Inputfile) (Outputfile) [optional switches]
+     for example:
+     KVEC test.bmp test.dxf -format dxf
+</pre>
+<pre>Wildcards ('*' and '?' ) are allowed for the file names.
+Nested subdirectories were not processed when using wildcards.
+If the input filename contains wildcards, the outputfilenames will be derived
+from the expanded input filenames and get different file suffixes. In the case
+of identical input and output filenames KVEC adds an leading underscore ('_')
+to the output filename in order to prevent overwriting. Full pathnames can be 
+specified for input files and output files.
+
+
+You can also start KVEC using a parameter file (KVEC.PAR) by typing:
+     KVEC -readpar [filename]
+[filename] is the (optional) name of a KVEC parameter file.
+The name of the parameter file must be KVEC.PAR (uppercase), if no filename
+for the parameter file is specified.
+You can use any of the example parameter files in the KVEC package (*.par).
+
+Inputfile is the name of a raster graphic file (Tiff, BMP, PCX, TGA, SGI,
+IMG, PNM, JPEG, GIF, WPG, PNG or FAX).
+If the name of the input-file is 'null' KVEC will create a 'white noise'
+random or other test raster images. 
+If the name of the input-file is 'vnull' KVEC will create a random
+vector image. The properties of this test image depend on 
+the parameter settings for the '-random' switch.
+If you are using the '-function' switch for plotting functions, the name
+name of the input file must also be 'vnull'.</pre>
+<pre>
+Outputfile is the name of the desired vector graphic file.
+Please note that the name of the output file must be specified with the
+filename extension. You cannot omit it.
+
+Note:
+If the input-file has already a vector-format (WMF or ART), most of the
+switches will be disregarded. In this case KVEC only performs a format-
+conversion from one vector format to another vector format.
+
+Currently supported vector formats are:
+      - Windows Metafile, Postscript, AutoCad DXF, HPGL, LogoArt ART,
+        Adobe Illustrator Format, XFIG, PCS and the KVEC format KVC
+	SWF 6.x (Macromedia Flash format) and SVG(Z) (scalable Vector Graphics)
+        DST (Tajiama stick format), HTML
+
+The switches are optional. If you don't specify any switches, the program
+chooses a set of parameters which are optimized with respect to the kind of
+graphic data. Switches may be abbreviated.
+The filenames must be specified before the optional switches.
+Some switches however don't require filenames and can be specified immediately 
+after KVEC. From these switches only one can be specified in each case:
+
+<a name="ehelp"></a>
+KVEC -ehelp &lt;topic&gt; Displays help information in English language
+
+<a name="ghelp"></a>
+KVEC -ghelp &lt;topic&gt; Displays help information in German language
+
+<a name="info"></a>
+KVEC -info:        Displays some useful information about KVEC on the screen.
+
+<a name="printform"></a>
+(Obsolete, because now freeware)
+KVEC -printform:   Automatically generates a registration form. This form can
+                   be sent to the author by E-Mail, Fax, or postal mail in 
+                   order to get a registration key. The registration key is
+                   a max. 5 digit number, which allows the user to register
+                   the software and get access to extended features of KVEC.
+                   You will be prompted to select a language. The registration
+                   form will then be generated in your preferred language.
+                   The registration form consists of plain ASCII text.
+                   If you print it out from a text processing program, be
+                   sure that you choose a monospaced font and not a
+                   proportional font. For users from the European countries
+                   a special registration form is available from:
+            www.kvec.de/files/download/kvec_reg_info_eng/reg_info_eng_europe.htm
+                  
+<a name="register"></a>
+(Obsolete, because now freeware)
+KVEC -register:    As soon as you get a registration key you can use this
+                   switch to register the program. You will be prompted to
+                   enter your name, the serial-number, and your registration 
+                   key. Please type all characters exactly as printed in the 
+                   registration confirmation you receive from the author. If
+                   you have entered the information correctly, a message
+                   appears which thanks you for your registration. The
+                   received registration key is valid for updates and future
+                   releases of KVEC.
+
+<a name="readpar"></a>
+KVEC -readpar:     KVEC reads filenames and additional parameters from a
+                   parameter file (KVEC.PAR) rather than the commandline.
+                   Please note, that the parameter file must reside in the
+                   actual working directory. The parameter file KVEC.PAR
+                   is an ASCI file and can be edited with any text editor.
+                   Comments in the parameter file must be marked by a
+                   #-character and may appear anywhere behind a parameter
+                   or at the beginning of a line.
+
+KVEC -readpar [filename]:
+                   KVEC reads filenames and additional parameters from the
+                   specified parameter file [filename].
+
+KVEC *.jpg *.jpg -rename: (only Windows version). This is a very special 
+                   switch for renaming multiple files. The renamed filenames
+                   will have the prefix: &quot;high_&quot;. This is useful in order to 
+                   prepare input files together with the switch &quot;-html&quot;. 
+                   Generally this will be applied to jpg-files. Here 
+                   an example: 'kvec image*.jpg *.jpg -rename'
+</pre>
+<pre><a name="writepar"></a>
+KVEC -writepar:    Generates a KVEC parameter file. The user will be prompted
+                   to enter filenames and additional parameters.         
+                   The name of the parameter file is always 'KVEC.PAR'    
+                   and will reside in the actual directory.             
+                   You can add comments behind the parameters you are
+                   promped to input (see above). Parameters always begin with
+                   a leading '-'character. After the parameter file has been
+                   written, the program should be restarted using the
+                   '-readpar' option.
+
+KVEC -writepar [filename]:
+                   Generates a KVEC parameter file with the specified
+                   filename. 
+
+
+The other switches must follow the input and output filenames:
+
+<a name="anti"></a>
+-antialiasing &lt;N&gt;: (Only for Vector-Raster-Conversion): Anti-Aliasing will
+                   be applied when rendering.
+                   &lt;N&gt;: 0: no antialiasing, 1: good quality, 2: best quality
+
+<a name="bezier"></a>
+-bezier:           The output will consist of bezier-curves instead of
+                   straight lines. This allows you to zoom the image without
+                   getting edges. For output formats which don't support
+                   bezier curves, the bezier algorithm will
+                   be simulated and approximated by polylines.
+</pre>
+<pre>-bkcolor &lt;r&gt; &lt;g&gt; &lt;b&gt;: background color for plotting user-defined functions
+                   (see switch '-function')
+
+<a name="black"></a>
+-black:            Output color for vectorization is always black
+
+<a name="centerline"></a>
+-centerline mixed: The effect of this parameter depends on the value of the
+                   parameter -lwidth. (If used together with -centerline,
+                   the meaning of the parameter -lwidth is modified).
+                   Before vectorizing, all detected objects were checked for
+                   its maximal thickness. All objects with a maximal
+                   thickness less than -lwidth were treated as line objects;
+                   all other objects were vectorized in the normal way.
+                   The vectorization of line objects does not result in
+                   border lines around the objects. It produces single lines
+                   which are located along the centerlines of the objects.
+                   The final linewidth of this generated single lines will
+                   be adopted so that the area of the line object is about
+                   the same as the area of the original object.
+                   (this has no effect, if the output format cannot handle
+                   variable linewidths). This is the DEFAULT.
+
+-centerline lines: The same as 'centerline mixed' except that only line
+                   objects will be generated. All other objects will be
+                   discarded.
+-centerline off:   Turns centerline vectorization off (Default)
+
+<a name="colspace"></a>
+                   Selects the internal color space which is used by kvec.
+                   The effect of changing the internal color space will be
+                   noticed when used together with the &quot;colorsep&quot; option
+                   or when bitmap processing is performed (&quot;process&quot; option).
+-colspace rgb:     RGB color space (default).
+-colspace rb:      RB color space 
+-colspace gb:      GB color space 
+-colspace gr:      RG color space 
+-colspace cmyk:    CMYK color space
+-colspace cy:      CY color space
+-colspace my:      MY color space
+-colspace mc:      CM color space
+                   Note: If a color space other than RGB or CMYK is selected,
+                   the colors will be changed such that the optical
+                   impression will be quite near to the original image.
+
+<a name="colsep"></a>
+                   Selects the type of color separation. The output file  
+                   will only contain the specified color components.
+                   Please note, that for cmyk separation the color space is
+                   also set to the right value.
+-colsep rgb:       no color separation (default).
+-colsep cmyk:      no color separation 
+-colsep rb:        extract R and B components 
+-colsep gb:        extract G and B components 
+-colsep gr:        extract R and G components 
+-colsep cy:        extract C and Y components
+-colsep my:        extract M and Y components
+-colsep mc:        extract C and M components
+-colsep rr:        separate R color 
+-colsep gg:        separate G color 
+-colsep bb:        separate B color 
+-colsep cc:        separate C color 
+-colsep mm:        separate M color 
+-colsep yy:        separate Y color 
+                   Note: It is useful to produce a gray-scale output file 
+                   for single component color separation. This can be
+                   achieved by using the &quot;-black&quot; option together with colsep.
+
+<a name="coord"></a>
+                   Specifies the type of internal scaling of coordinates
+-coord optimize:   coordinates may be rescaled in order to improve resolution
+                   (default)
+-coord pixel:      the original pixel coordinate system will be used
+
+<a name="dimension"></a>
+-dimension N:      Specifies the maximum extension (in x- or y-direction)
+                   of the generated output image. Default: 512 pixels.
+                   IMPORTANT: This parameter will only be evaluated, if
+                   the input file is of vector type (or 'null').
+
+<a name="xdim"></a>
+-xdim N:           Specifies the maximum extension (in x-direction)
+                   of the generated (raster) output image. Default: original value
+<a name="ydim"></a>
+-ydim N:           Specifies the maximum extension (in y-direction)
+                   of the generated (raster) output image. Default: original value
+
+<a name="dither"></a>
+-dither off:       Turns dithering off (Default)                         
+-dither linear:    Turns dithering on
+                   Note: Dithering will only performed, if the output format
+                   is a raster format.
+</pre>
+<pre>-drcolor &lt;r&gt; &lt;g&gt; &lt;b&gt;: drawing color for plotting user-defined functions
+                   (see switch '-function')
+<a name="dst"></a>
+-dst dist &lt;N&gt;:     specifies the stitch distance in 0.1 mm                         
+-dst width &lt;N&gt;:    specifies the line width in 0.1 mm                        
+-dst fill hollow:  Colored areas will not be filled                        
+-dst fill hatch:   Generates cross-hatched lines                         
+-dst fill zigzag:  Generates Zigzag lines                      
+
+<a name="dxfopt"></a>
+-dxfopt type 2dim: Generates 2-dimensional coordinates (if the output format
+                   is DXF. (Default)
+-dxfopt type 3dim: Generates 3-dimensional coordinates (if the output format
+                   is DXF. 
+-dxfopt form unix: inserts only LF (line feed) at line ends.
+-dxfopt form dos:  inserts CR and LF at line ends.
+
+<a name="fill"></a>
+The fill parameters specify how the generated polylines/polygons will be
+interpreted:
+
+-fill solid:       Polygons are always closed (i.e. the last point of a
+                   vector is identical with the first point). The Polygons
+                   are filled with individual colors (DEFAULT). The sort
+                   parameter should not be 'min' in this case because the 
+                   larger Polygons would cover and hide the smaller ones.
+
+-fill line:        Output consists of polylines with individual colors. The
+                   polylines are not closed. This is the preferable fill
+                   parameter if the outputfile is generated for a pen-plotter.
+                   The plotter pen will never plot more than one color one
+                   upon another. The layout will depend on the sort order 
+                   specified with the 'sort' switch. With the switches 
+                   'reduce' and 'smooth' you can once more refine the layout
+                   of the output.
+				    
+-fill contour:     The same as '-fill solid', however the interiors of the 
+                   polygons remain 'hollow'. Lines with different colour
+                   can cover each other. The layout will depend on the
+                   sort order specified with the 'sort' switch.
+
+<a name="font"></a>
+-font:             KVEC generates (before vectorization) an optimized set
+                   of parameters, which is suited for vectorization of
+                   dark colored text on a clear background. All objects
+                   get a unique 'dark' color. Sort order &quot;local&quot; is 
+                   automatically turned on for generation of sub-polygons.
+
+<a name="format"></a>
+The format parameters specify the output format:
+
+-format wmf:       Output format is Windows Metafile format, *.WMF                
+-format amf:       Output format is ALDUS WMF Metafile (default), *.WMF
+-format emf:       Output format is Enhanced Windows Metafile format, *.EMF
+-format ps:        Output format is Postscript level 2, *.PS             
+-format eps:       Output format is Encapsulated Postscript level 2, *.EPS                
+-format dxf:       Output format is AutoCad DXF, *.DXF              
+-format hpgl:      Output format is HPGL, *.HPG or *.PLT             
+-format art:       Output format is ART LogoArt (OS/2-graphics program), *.ART
+-format ai:        Output format is Adobe Illustrator, *.AI
+-format bmp:       Output format is Windows Bitmap, *.BMP
+-format tiff:      Output format is Tiff, *.TIF
+-format zyxel:     Output format is ZYXEL FAX 
+-format pfax:      Output format is PowerFax format 
+-format kvc:       Output format is KVEC vector format 
+-format xfig:      Output format is XFIG vector format (Linux Drawing program) 
+-format pcs:       Output format is Pfaff PCS vector format  
+-format dst:       Output format is Tajiama stick format  
+-format wav:       Output format is WAV  
+-format svg:       Output format is SVG (Scalable Vector Graphics)  
+-format svgz:      Output format is SVGZ (Compressed Scalable Vector Graphics)  
+-format swf:       Output format is SWF (Macromedia Flash Format, 6.x)  
+		   The Macromedia Flash MX Editor only accepts special
+                   settings which can be controlled by the switch 'winding'
+-format png:       Output format is PNG (Portable network graphics)  
+-format jpeg:      Output format is JPEG
+-format html:	   (only windows version)
+                   Please Note: '-format html' is a synonym for the following
+                   set of parameters:
+                   '-format jpg'  '-hmtl source default','-html screen default', 
+                   '-html preview default', '-mode isotrop'
+
+                   This is not a real output format, but a switch for a
+                   very special application: Assume you have a lot of 
+                   jpg-files and you want to generate a set of html-files which
+                   allow you to view all these files in a convenient way.
+                   Kvec will generate a seperate html-file for each individual
+                   image. A html-file called &quot;directory.htm&quot; will also be
+                   generated, which refers to the individual html-files 
+                   by preview images. </pre>
+<pre>                   Each image will be created in 3 resolutions:
+                   low (preview), medium (screen display), and high (download). 
+                   Therefore, 3 versions will be created from each image.
+                   Assuming a input filename of test01.bmp we will get: 
+                   source_test01.jpg, screen_test01.jpg, previe_test01.jpg.
+                   The following command will perform the whole procedure 
+                   
+                   kvec source_dir\test*.bmp destination_dir\*.htm 
+
+                   Assume we have 100 image files of any readable input format: 
+                   KVEC will generate 300 jpeg files in the destination 
+                   directory. KVEC will also generate 100 html files containing
+                   links to the generated image files. 
+                   The preview images can be viewed in the file directory.htm
+                   which will also be created in the destination directory. 
+
+                   See also: '-html ...'
+
+
+--------!-function-E------------------------
+<a name="function"></a>
+-function ...:     (see also: '-nstep', '-bkcolor', '-drcolor', '-xmin',
+                   '-xmax', '-ymin', '-ymax', '-tmin', 'tmax', -lwidth')
+                   This switch is not for processing image files.
+                   The function switch lets KVEC generate plots of mathematical
+                   functions, which can be entered right after the function-
+                   keyword. The definition of math. function also includes
+                   the definition of user-specified constants. As the definition
+                   of functions and variables can be very long, it is not 
+                   recommended to enter all this values on the commandline.
+                   It is much more practicable to enter all the definitions in
+                   a KVEC parameter file.
+                   The strings following the '-function' keyword are interpreted
+                   as a C-style written definition of up to 8 functions and 
+                   100 Variables. The keyword 'endfunc' (without &quot;;&quot;) terminates
+                   the function definition. Assignments of variables (constants)
+                   must precede the definition of functions! Thus, variables can
+                   not be initialized with function results.
+                   Some restrictions apply:
+                   Functions must follow one the following naming conventions:
+                   
+                   f?(argument)         ('?' can be any alphanumeric char)
+                                        (argument can be one of: x,y,z,t,i)
+                   x?(argument) y?(argument)       ('?' any alphanumeric char)
+                            (parametric representation)
+                   r?(phi-argument)   ('?' can be any alphanumeric char)
+                            (argument must be: p)
+                            (representation in polar-coordinates)
+                   Allowed are also x?(), y?() or f?() 
+                        (without argument, mainly for iterative functions)
+                   Please note: The function names (two chars long) can also be
+                   used as variable. This can be useful for initialization in
+                   iterative functions or loops.
+                   As initialization of constants and variables precede the
+                   function definitions, they are 'global' and refer to all
+                   (of the max. 8 possible) functions. 
+                   
+                   Here a few examples: f1(x)=sin(x); fa(t)=cos(t); (allowed)
+                                        fabc(x)=x; (not allowed)
+                                        f1(x) = cos(x); (not allowed)
+                                        f2(x)=SUM(n=1,100,x^n/n!);  (allowed)                   
+                                        x3(t)=cos(t); y3(t)=sin(t); (allowed)
+                                        y(x)=exp(x);  (not allowed)
+                                        x1(i)=KV_PRIMES[i]; y1(i)=i; (allowed)
+                                        r1(p)=0.5*p; (allowed)
+                   
+                   Each statement ends with a ';' Within a statement, no blanks
+                   or other white-spaces are allowed. Statements however can be 
+                   seperated by any white-space chars.
+                   Please note that max. eight different functions are allowed.
+
+                   The function names are two chars long and must start with a 
+                   'f', 'x', 'y' or 'r' followed by any alphanumeric char. If 
+                   we have a parameter representation (two functions, e.g. 
+                   x1(t)=... and y1(t)=...), the x1(t) function must precede the 
+                   y1(t) function. A parameter representation counts as one function.
+                   If the order of definition is reversed, the result is 
+                   unpredictable. The function argument must be one of:
+                   'x', 'y', 'z', 't' or 'p' (in case of polar-coordinates). 
+                   Expressions can be nested by braces '(', ')'. Constants may 
+                   be defined like this (examples):
+                   ABC=1.234;  SQ2=1.414; ...
+                   Note: Constants may not be defined by expressions.
+                   
+                   The following operators are allowed:
+                   '+' Addition or unitary '+'
+                   '-' Subtraction or unitary '-'
+                   '*' Multiplication
+                   '/' Division
+                   '^' Raising to a power
+                   '!' Factorial (can also be applied to expressions)
+                   'SUM' Summation. Syntax: SUM(n=&lt;start&gt;,&lt;end&gt;,&lt;func&gt;);
+                        e.g.: SUM(n=1,100,x^n/n!);
+                   'PROD' Products. Syntax: PROD(n=&lt;start&gt;,&lt;end&gt;,&lt;func&gt;);
+                   'ITER' Iteration loops. Syntax: 
+                          ITER(n=&lt;start&gt;,&lt;end&gt;,&lt;epsilon&gt;,&lt;f?=init-value&gt;,&lt;func&gt;);
+                   'iterate' (more flexible iteration loops.) Syntax: 
+                      iterate(n=&lt;start&gt;,&lt;end&gt;,&lt;epsilon&gt;,&lt;(list of var-initializations&gt;);
+
+                   (There can be only one loop-variable in the SUM,PROD or ITER
+                   statements, loop-variables must be initialized with constants).
+                   The 'ITER' command is intended for simple functions of one
+                   variable (e.g. f1(x)=&lt;and expression containing x&gt;). The function
+                   term must be definied as the last expression within the ITER() term.
+                   The function-term may contain the function name as variable
+                   (iteration). The Iteration starts with a loop variable of value
+                   &lt;start&gt; and ends when the loop variable is greater or equal than
+                   &lt;end&gt; or when the difference between the results of two iterations
+                   is less than epsilon. Iteration loops for functions in parameter 
+                   representation  (x(t) and y(t) is not possible with the 'ITER'command.
+                   For this purpose please use the more general 'iterate()' command.
+                   
+                   Syntax: 
+                   iterate(n=&lt;start&gt;,&lt;end&gt;,&lt;epsilon&gt;,&lt;(list of variable-initializations&gt;);
+                   
+                   The 'iterate' command does not include the function definition.
+                   the function-definition(s) must be defined right after the iterate
+                   command. This command can also be used for iterating functions
+                   of two variables or functions definied by parameter representation. 
+                   The variable definitions/initializations are only valid for the
+                   function(s) following the 'iterate' command (not global),
+
+                   Note: Functions can also be definied without function arguments
+                   (e.g. x1() = &lt;any term&gt;). The function can also
+                   contain the funcion name itself (iteration). The no. of iterations
+                   is controled by the nstep parameter (globally by specifying
+                   '-nstep &lt;N&gt;' outside of the region definied by '-function' and
+                   'endfunc') or individually for each definied function by 'nstep &lt;N&gt;;'
+                   within the function region. The actual iteration index can be used
+                   within the function by the internal variable 'II'. Please do not
+                   assign any values to the variable 'II'.
+
+                   All functions defined in the C-ANSI standard can be used.
+                   This covers most of the elementary mathematical functions.
+                   The following higher mathematical functions can also be used
+                   (at the moment, this set will be expanded):
+
+                   gamma_r(x);          (real Gamma Function)
+                   PI_func(x);          (no. of primes up to x)
+                   nth_prime(x);        (returns the n-th prime number)
+                   nth_mprime(x);       (returns n-th Mersenne prime-exponent)
+                   nth_zzero();         (returns n-th zero of the zeta-function)
+                                    (only available in special MATH KVEC version)
+                   IsPrime(x);          (returns 0.0 or 1.0, in case of prime)
+                   riemann_r(x);        (real Riemann Function)
+                   sigma(x);            (no. of divisors function)
+                   zeta_r(x);           (real Zeta Function)
+                   zeta_cr(x);          (real Zeta-Function along crit. strip)
+                   zeta_ci(x);          (imaginary Zeta-Function along &quot;)
+
+                  KVEC offers also predefined mathematical constants and variables
+                  which can be used (all capital letters):
+                   M_PI 
+                   M_E (Euler-Constant)
+                   M_G (Gamma-Constant)
+                   M_LN2 (= log(2))
+                   M_Z3 (= zeta(3))
+
+                   KV_PRIMES[n]      (Primenumbers, n: 0-KV_MAXPRIME)
+                   KV_MPRIMES[n]     (Mersenne Prime-Exponents, n: 0-41)
+                   KV_ZETA_ZEROS[n]  (zeros of zeta-function, along the
+                                     'critical line', only available 
+                                     in special MATH-version of KVEC,
+                                     allowed n: 0-99999 )                  
+                   BN[n]             (Bernoulli-numbers, n: 0-99)
+                   BN_FAK[n]         (=BN[n]/n!, n: 0-99)
+                   ZETA[n]           (= zeta_r(n), n: 0-99)
+                   II                (Internal loop variable)
+ 
+                   Brackets ('[' and ']') must be used when this predefined
+                   arrays ares used (instead of '(' or ')').
+                   Please note that indices start with 0, so the first prime
+                   is in KV_PRIMES[0].
+
+                   Graphical commands can be entered at any postion after the
+                   section of the variables definition (please note that
+                   there is no '=' char and no leading '-'). These commands
+                   must be located between the '-function' and 'endfunc' 
+                   keywords.
+
+                   bkcolor r g b;    (set the background color to (rgb) value)
+                   drcolor r g b;    (set actual drawing color to (rgb) value=
+                   lwidth n;         (set actual linewidth to n)
+                   nstep n;          (set actual no. of interpolation steps)
+                   imin n;         (set min value for integer function argument) 
+                   imax n;         (set max value for integer function argument) 
+                   object &lt;object-type&gt;; (set type of KVEC object)
+                          Object-type can be one of (specify without ''):
+                          'polyline' (this is the default)
+                          'polygon'
+                          'markcircle', 'markfilledcircle'
+                          'markrect','markfilledrect'
+                          'markrbox','markfilledrbox'
+                          'hline', 'vline'
+                          'polyspline', 'filledpolyspline'
+
+                   msize n;          (set the marker size in % of image size)
+                   pmode &lt;mode&gt;:     (set drawing mode for functions with parametric
+                                      representation):
+                          'normal'   (draw x-y plot, this is the default)
+                          'xt'       (draw x-t plot)
+                          'yt'       (draw y-t plot)
+                          'abs'      (draw absolute value of (x,y) versus t)
+                          The xt/yt/abs modes are useful if you want to plot the
+                          real/imaginary part (or both) of a complex function in
+                          dependence of a parameter t.
+
+                   IMPORTANT: Graphical settings will be applied only for the
+                   currently processed (active) user-defined function (except
+                   the bkcolor setting). They can be specified individually for
+                   eych user-defined function. If not specified, default-values
+                   will be applied. Graphical settings must precede the function
+                   definition. Using 'polyline' or 'polygon' will result in
+                   continuously drawn lines between the points with the given
+                   spacing (see nstep). Using markers will set marker symbols
+                   (circles, rectangle or line segments) at the plotting 
+                   positions without drawing lines between them.
+                   IMPORTANT: The size of these marker symbols depends on the
+                   'plot-history' of all drawn objects. Thus, plotting markers 
+                   should be the last plotting action (after all other functions
+                   have been plotted).
+
+                   When using SVG or SWF format, the output size and dimensions
+                   should be controled with the following switches:
+                   -paper user &lt;xdim in mm&gt; &lt;ydim in mm&gt;            and/or
+                   -mode aniso  or -mode iso        
+
+                   See also: '-nstep', '-bkcolor', '-drcolor', '-tmin',
+                             '-xmin', '-xmax', '-ymin', '-ymax'
+                   Here are examples of a KVEC parameters file which show the
+                   use of kvec user-defined functions:
+
+			# KVEC parameter file
+			# Don't add comments between &quot;-func&quot; and &quot;endfunc&quot;
+			# Example shows how to plot 2 mathematical functions
+			# using different colors
+			# input file must be &quot;vnull&quot;:
+			vnull
+			# select output file; output format: SWF (Flash)
+			c:\test.swf
+			# Here starts the function definition:
+			-func
+			c1=5.0;
+			drcolor 0 0 128;
+			f1(x)=zeta_cr(x);
+			drcolor 192 64 64;
+			f2(x)=c1+sin(x/M_PI)*exp(cos(sin(x)));
+			endfunc
+			# set background color for the graph
+			-bkcolor 220 220 255
+			# linewidth:
+			-lwidth 10
+			# no. of interpolation steps
+			-nstep 4000
+			# set up output size of the image (in mm)
+			-paper user 1000 100
+			# set anisotropic scaling mode
+			-mode aniso
+			# x-range for plotting
+			-xmin 1000 -xmax 1200
+			-monitor
+
+			++++++++++++++++++++++++++++++++++++++++++++++++
+
+			# Example shows how to use the summation symbol
+			# f1(x) is the series expansion of cos(x)
+			# using different colors
+			# input file must be &quot;vnull&quot;:
+			vnull
+			test.swf
+			-func
+			c1=5.0; k=2;
+			drcolor 0 0 128;
+			f1(x)=1+SUM(n=1,25,(-1)^n*x^(2*n)/(2*n)!);
+			drcolor 128 0 64;
+			f2(x)=cos(x);
+			endfunc
+			-bkcolor 220 220 255
+			-lwidth 1
+			-nstep 1000
+			-paper user 300 300
+			-mode aniso
+			-xmin -20.5 -xmax 20.5
+			-monitor
+
+                   The plotted values (x,y) can be printed to the specifified
+                   output device be setting: '-debug plot'
+
+</pre>
+<pre><a name="gapfill"></a>
+-gapfill N:        This parameter controls whether the vectorizer can 'jump'
+                   over gaps while tracing an object. The value N must be
+                   specified in 10ths of a pixel. Allowed values: 0 - 30.
+
+<a name="grit"></a>
+-grit N:           Polylines or polygons which belong to a bounded area with
+                   a number of pixels fewer than N will be filtered out (i.e.
+                   small details are 'erased'). The default value depends on
+                   the dimensions and the colour depth of the picture. The
+                   use of a grit value &gt; 0 increases the computing time
+                   and increases also considerably the demand of memory.
+                   If you have to deal economically with memory you should
+                   try a grit value of 0 and decrease the quantization value.
+
+<a name="hatch"></a>
+The hatching parameters will only be evaluated if the output format is
+DXF, PCS or HPGL.
+
+-hatch1 density N: The max. number of horizontal hatch lines will be limited
+                   to N (use 0 in order to turn off hatching)
+-hatch2 density N: The max. number of vertical hatch lines will be limited
+                   to N (use 0 in order to turn off hatching)
+-hatch1 angle N:   hatch angle for horizontal hatch lines (Default: 40 deg.)
+-hatch2 angle N:   hatch angle for vertical hatch lines (Default: 40 deg.)
+</pre>
+<pre><a name="html"></a>
+The html parameters specify how to build additional html files which contain 
+links to the generated output images. (See also: '-format html')
+
+-html source none: No conversion to high-resolution version (source 
+                   resolution) will take place. Individual html files will 
+                   not contain links to high resolution images.
+-html source original: A copy of the original image file (renamed to 
+                   source_xxx..) will be created in the destination 
+                   directory. Individual html-files will contain download-
+                   links to them.
+-html source format: Conversion and creation of high resolution files by
+                   applying all parameters and output format. The files 
+                   will be created in the destination directory. Individual 
+                   html files will contain download links to them.
+-html source default: (the same as 'format'). However: A copy (instead of 
+                   conversion) will be created, if source and destination 
+                   format are equal.
+                   If the dimensions of the source image file are 
+                   dimx &lt;=800 and dimy &lt;= 600, no high resolution file will 
+                   generated and no download link in the html file.
+
+-html screen none: No conversion to screen-resolution version and no 
+                   embedding in the corresponding html file.
+-html screen original: A copy of the original image file (renamed to 
+                   'screen_xxx..&quot;)
+                   will be created in the destination directory. Images 
+                   will embedded in the corresponding html-files.
+-html screen format: Conversion and creation of screen resolution files by
+                   applying all parameters and output format. The files will
+                   be created in the destination directory. These images
+                   will be embedded in the corresponding html-files.
+-html screen default: (the same as 'format'). However: Only format-parameter
+                   will be applied and resampling to 800*600 pixel (isotrop).
+
+
+-html preview none: No conversion to preview-resolution version. 
+                   'directory.htm'will not be created. 
+-html preview original: A copy of the original image file (renamed to 
+                   'previe_xxx..&quot;) will be created in the destination 
+                   directory. Images will embedded in the files 
+                   'directory.htm'.
+-html preview format: Conversion and creation of preview resolution files by
+                   applying all parameters and output format. The files will
+                   be created in the destination directory. These images
+                   will be embedded in the file 'directory.htm'.
+-html preview default: (the same as 'format'). However: output-format is
+                   'JPEG' and resampling to 60*60 pixel (isotrop).
+
+</pre>
+<pre><a name="html"></a>
+-jpg quality &lt;N&gt;:  Selects the quality for the JPEG output format.
+                   Allowed values: 1-100 (Default: 75)
+-jpg grayscale on: Selects gray output for JPEG output images
+-jpg grayscale off: colored output for JPEG output images (Default)
+
+<a name="justify"></a>
+The justify parameters will only be evaluated if input and output formats
+are both raster type. The color depth of the input file must be 1 bit.
+The main application for these options is justifying and cleaning
+binary (B/W) scanned images in order to embed them into documents.
+The default justify parameters are optimized for justifying and cleaning
+DIN A4 images (300 dpi) containing text.
+Carbon copies often have dirty black margins or are slightly distorted
+by an small angle because the source got out of place while copying.
+KVEC can automatically correct these errors, if you choose a proper set
+of justify parameters.
+
+-justify type off:   No justification will be performed (default).
+-justify type rotate:Justification will be performed only by rotation     
+-justify type all:   Justification will be performed by rotation and cleaning
+                     (cutting off) the dirty margins.
+-justify phimax N:   maximal allowed rotation angle. This is the max.
+                     distortion angle which can be corrected. Please note
+                     that the computional time increases linear with the
+                     size of phimax. Default: 5.0 degrees
+-justify parameter N1 N2 N3:
+                     These values control the operation of the internal
+                     algorithms (detecting large rectangular blocks from 
+                     which the rotation angle is deducted)
+                     N1: 'thicking' factor. Each pixel will be enlarged by
+                         this factor in order to make block structures
+                         more detectable. Default: 16
+                     N2: min. filter value. Regions with a coherent no. of
+                         pixels less than N2 will be eliminated before the
+                         internal block detection algorithm starts.
+                         Default: 50
+                     N3  max. filter value. Regions with a coherent no. of
+                         pixels greater than N2 will be eliminated before the
+                         internal block detection algorithm starts.
+                         Default: 400
+                     Note: The default parameter values are optimized for a
+                     DIN A4 image (300 dpi resol.) containing an average text.
+                     (the average size of charcters lies within the range
+                     50 up to 400 pixels for a character).
+                     This will ensure that only those parts of the image
+                     which contain text information are relevant for the
+                     computation of the rotation angle.
+
+                     For other types of B/W images (electronic circuits or
+                     plans) other values for N1, N2 and N3 may work better.
+
+<a name="kvc"></a>
+-kvc compress none: Disables any compression for the KVC Vector format     
+-kvc compress lzw: Applies the LZW compression technique to the KVC format
+                   (lzw is the default compression)
+-kvc bufsize &lt;N&gt;:  Specifies the size of the packets which were compressed
+-kvc byteorder i:  Selects the INTEL byteorder for the binary data (Default)
+-kvc byteorder m:  Selects the MOTOROLA byteorder for the binary data
+
+<a name="lwidth"></a>
+-lwidth:           Specifies the line width of the generated output vectors
+                   in 10ths of a pixel.
+                   Allowed values: 0-1000. Default value: 0.
+                   Note that this parameter has a different meaning if
+                   used together with the option -centerline.
+                   In this case the default value for the lwidth is 100.
+
+<a name="maxpoints"></a>
+-maxpoints:        Specifies the max. no. of points which are allowed for
+                   the generated polylines or polygons. This is useful if
+                   KVEC produces vectors with more than 32767 points and
+                   you use the WMF output format (WMF does not support
+                   polylines with more than 32767 points)
+
+<a name="mode"></a>
+-mode iso:         Select isotropic mode. This mode preserves the the X/Y ratio
+                   of the picture. (A circle will also be a circle in the
+                   output picture). This is the default setting.
+                   (PostScript, AI, SWF and SVG format and 
+                   vector-raster conversion only)
+
+
+-mode aniso:       Select anisotropic mode. The picture will be scaled to fit
+                   the whole papersize according to the selected paperformat.
+                   (PostScript, AI, SWF and SVG format and 
+                   vector-raster conversion only)
+
+
+<a name="monitor"></a>
+-monitor:          Turn on progress monitor. Information about the current
+                   status and the progress of the program will be displayed.
+</pre>
+<pre><a name="nstep"></a>
+-nstep:            Set no. of steps (interpolation points) for user defined
+                   functions (see switch '-function')
+
+<a name="overlapp"></a>
+-overlap:          If this switch is specified, Polygons will slightly 
+                   overlap, actually one pixel. (DEFAULT: no overlap).
+                   If vector images show strange coloured gaps after they 
+                   have been rotated (especially along border lines between 
+                   adjacent Polygons) you should set this switch.
+
+<a name="palette"></a>
+-palette optimize: KVEC will use internal optimzed palette when color
+                   reducing has to be done (default)
+-palette fixed:    KVEC will use a standard color palette when color
+                   reducing has to be done. This often gives  better vectorization
+                   results, especially if the raster image contains less than 16 colors.
+-palette user &lt;n&gt;  R1,G1,B1, .... Rn,Gn,Bn:
+                   Here you can specify a user supplied color palette which
+                   contains &lt;n&gt; colors. The value &lt;n&gt; must be followed by
+                   &lt;n&gt; RGB triples. It is more practicable to use a parameter
+                   file than entering all RGB values on the commandline.
+                   The value for n may not exceed 256 colors.
+<a name="paper"></a>
+-paper (format):   Select papersize. Currently this option controls the
+                   output size for the following formats:
+                   PostScript, Adobe Illustrator, SVG and SWF. 
+                   The format-string must be one of the following:
+
+                   'user' width height  (width and height specified in mm)
+                   (The size of a SVG and SWF graphics can be specified this way)
+                   'LETTER'             (Letter 8 1/2 x 11 in)
+                   'TABLOID'            (Tabloid 11 x 17 in) 
+                   'LEDGER'             (Ledger 17 x 11 in)
+                   'LEGAL'              (Legal 8 1/2 x 14 in)
+                   'STATEMENT'          (Statement 5 1/2 x 8 1/2 in)
+                   'EXECUTIVE'          (Executive 7 1/4 x 10 1/2 in)
+                   'A3'                 (A3 297 x 420 mm)
+                   'A4'                 (A4 210 x 297 mm)
+                   'A5'                 (A5 148 x 210 mm)
+                   'B4'                 (B4 (JIS) 250 x 354)
+                   'B5'                 (B5 (JIS) 182 x 257 mm)
+                   'FOLIO'              (Folio 8 1/2 x 13 in)
+                   'QUARTO'             (Quarto 215 x 275 mm)
+                   '10X14'              (10x14 in)
+                   'NOTE'               (Note 8 1/2 x 11 in)
+                   'ENV_9'              (Envelope #9 3 7/8 x 8 7/8)
+                   'ENV_10'             (Envelope #10 4 1/8 x 9 1/2)
+                   'ENV_11'             (Envelope #11 4 1/2 x 10 3/8)
+                   'ENV_12'             (Envelope #12 4 \276 x 11)
+                   'ENV_14'             (Envelope #14 5 x 11 1/2)
+                   'ENV_DL'             (Envelope DL 110 x 220 mm)
+                   'ENV_C5'             (Envelope C5 162 x 229 mm)
+                   'ENV_C3'             (Envelope C3  324 x 458 mm)
+                   'ENV_C4'             (Envelope C4  229 x 324 mm)
+                   'ENV_C6'             (Envelope C6  114 x 162 mm)
+                   'ENV_B4'             (Envelope B4  250 x 353 mm)
+                   'ENV_B5'             (Envelope B5  176 x 250 mm)
+                   'ENV_B6'             (Envelope B6  176 x 125 mm)
+                   'ENV_ITALY'          (Envelope 110 x 230 mm)
+                   'ENV_MONARCH'        (Envelope Monarch 3.875 x 7.5 in)
+                   'ENV_PERSONAL'       (6 3/4 Envelope 3 5/8 x 6 1/2 in)
+                   'FANFOLD_US'         (US Std Fanfold 14 7/8 x 11 in)
+                   'FANFOLD_STD_GERMAN' (German Std Fanfold 8 1/2 x 12 in)
+                   'FANFOLD_LGL_GERMAN' (German Legal Fanfold 8 1/2 x 13 in)
+                   'ISO_B4'             (B4 (ISO) 250 x 353 mm)
+                   'JAPANESE_POSTCARD'  (Japanese Postcard 100 x 148 mm)
+                   '9X11'               (9 x 11 in)
+                   '10X11'              (10 x 11 in)
+                   '15X11'              (15 x 11 in)
+                   'ENV_INVITE'         (Envelope Invite 220 x 220 mm)
+                   'A_PLUS'             (SuperA/SuperA/A4 227 x 356 mm)
+                   'B_PLUS'             (SuperB/SuperB/A3 305 x 487 mm)
+                   'A2'                 (A2 420 x 594 mm)
+                   'A1'                 (A1 594 x 840 mm)
+                   'A0'                 (A0 840 * 1188 mm)
+<a name="pattern"></a>
+This parameter applies only to vector objects and is therefore without effect
+for a pure raster-to-raster format conversion.
+The last three parameters DR, DG and DB specify the max. color differences  
+used for color shading or random color patterns. Allowed values: 0 up to 255.
+-pattern nodither   D1 D2 D3: No color shading (default)       
+-pattern left2right D1 D2 D3: Color shading from left to right 
+-pattern right2left D1 D2 D3: Color shading from right to left 
+-pattern top2bottom D1 D2 D3: Color shading from top to bottom
+-pattern bottom2top D1 D2 D3: Color shading from bottom to top
+-pattern inout      D1 D2 D3: Color shading from inside to outside
+-pattern outin      D1 D2 D3: Color shading from outside to inside
+-pattern randrgb    D1 D2 D3: Random color dithering
+
+Important: Please note, that the specified vector output format must support
+color shading. Currently only the KVC and ART format support color shading.
+Color shading will always be done if you choose a raster output format and
+your input file has a vector format.
+
+<a name="png"></a>
+The png-parameters will only be evaluated if the output format is the
+PNG (Portable Network Graphics) format:
+-png bitdepth &lt;N&gt;: Bitdepth of the PNG image. Allowed values: 1,4,8,24
+                   Palette images can only have up to 8 bits, RGB only 24 bit.
+                   Default: 24 Bit
+-png coltype gray: generates a gray scaled image
+-png coltype pal:  generates a palette image
+-png coltype rgb:  generates a RGB image with 24 bit bitdepth
+-png coltype alpha2: generates gray image with  alpha channel (not yet implemented) 
+-png coltype alpha4: generates RGB image with alpha channel  
+                   Default: rgb
+-png tcolor &lt;R&gt; &lt;G&gt; &lt;B&gt;: Selects a transparency color 
+                   Default: no transparency color
+-png interlace:    turns on interlacing (not yet implemented)
+                   Default: No interlacing
+-png gamma &lt;N&gt;:    specifies the gamma value  Default: 0.45
+                   Please enter integer number. 100000 corresponds to a value 1.0
+-png addpalette:   adds a palette to RGB (true color) images (not implemented)
+                   Default: PNG file contains palette only for palette images
+-png bkcolor &lt;R&gt; &lt;G&gt; &lt;B&gt;: specifies a background color for the PNG image
+                   Default: no background color
+-png ppx &lt;N&gt;:      sets the value for pixels per unit in x-direction
+-png ppy &lt;N&gt;:      sets the value for pixels per unit in y-direction
+-png pixunit meter: selects the unit as 1 meter.
+-png pixunit none:  selects the unit as unknown (Default)
+
+KVEC gets the bitdepth and the color type from the input file and uses default
+values for the png parameters if none of them are specified.
+In the case of vector-format to PNG conversion KVEC tries to use the highest possible
+bitdepth. This will be normally 24 bit unless another value is specified.        </pre>
+<pre><a name="primes"></a>
+-primes &lt;N&gt;:       Initialize internal primenumber array up to N
+                   (Default, if not specified: 1000000)
+</pre>
+<pre><a name="quantize"></a>
+-quantize N:       The input file will be quantized down to N colors before
+                   vectorization, if it contains more than N colours.
+                   (Default: 32 colours).
+                   For DXF and HPGL the default is 8 colors.
+</pre>
+    <pre>&nbsp;</pre>
+
+<br><a href="software_doc_eng2.htm">Next page</a>
+
+</body>
